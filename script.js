@@ -7,7 +7,6 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let sceneIndex=0,elapsed=0,lastTime=0,paused=false,animations=[],events=[],kept=false;
 let board=[],moves=0,puzzleWon=false,moveLockUntil=0,drag=null,flowerSelected=false;
 let currentMessage=null,messageObserver=null;
-let keepsakeObjectURL=null;
 let savedPuzzle=null;
 const labels=['A little beginning','A thousand questions','Piece by piece','A little honesty','A small gesture','More than words','From my heart','A little door left open'];
 const cache=new Map();
@@ -197,7 +196,7 @@ function endingScene(){
   const hello=el('a','ending-choice hello-choice','Send a little hello 💌');
   hello.href='https://wa.me/9647824961601';hello.target='_blank';hello.rel='noopener noreferrer';
   const keep=el('button','ending-choice flower-choice','Keep the flower for now 🌸');keep.type='button';
-  keep.onclick=()=>{saveKeepsake();keepFlower();};choices.append(hello,keep);
+  keep.onclick=()=>keepFlower();choices.append(hello,keep);
   endingReader(choices);addReplay('ending-replay');
 }
 function addReplay(cls=''){
@@ -219,22 +218,6 @@ function endingReader(actions){
     previous.hidden=state.page===0&&!scene.classList.contains('invitation');next.hidden=!state.hasMore();
     reader.classList.toggle('finished',!state.hasMore());actions.hidden=state.hasMore();
   }};state.button.refresh();
-}
-function getKeepsakeURL(){
-  if(!keepsakeObjectURL){
-    if(window.KEEPSAKE_DATA){
-      const bytes=Uint8Array.from(atob(window.KEEPSAKE_DATA.split(',')[1]),c=>c.charCodeAt(0));
-      keepsakeObjectURL=URL.createObjectURL(new Blob([bytes],{type:'image/png'}));
-    }else{
-      keepsakeObjectURL='assets/keepsake.png';
-    }
-  }
-  return keepsakeObjectURL;
-}
-function saveKeepsake(){
-  // Download within the button gesture, so mobile browsers can allow it.
-  const a=el('a');a.href=getKeepsakeURL();a.download='A little flower for you.png';
-  a.hidden=true;document.body.append(a);a.click();a.remove();
 }
 function clearEndingStage(className){
   animations=[];events=[];messageObserver?.disconnect();messageObserver=null;currentMessage=null;
