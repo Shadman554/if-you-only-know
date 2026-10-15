@@ -5,10 +5,9 @@ RUN node build.cjs
 
 FROM node:24-alpine
 ENV NODE_ENV=production
-ENV PORT=3000
 WORKDIR /app
-COPY --from=build --chown=node:node /app/dist ./dist
-COPY --from=build --chown=node:node /app/server.cjs ./server.cjs
-USER node
-EXPOSE 3000
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/server.cjs ./server.cjs
+COPY --from=build /app/package.json ./package.json
+EXPOSE 3000 8080
 CMD ["node", "server.cjs"]

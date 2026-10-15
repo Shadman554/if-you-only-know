@@ -11,8 +11,15 @@ function createServer(){
     res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');
     const reply=(code,text)=>{res.writeHead(code,{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'});res.end(req.method==='HEAD'?undefined:text);};
     if(!['GET','HEAD'].includes(req.method)){res.setHeader('Allow','GET, HEAD');return reply(405,'Method not allowed');}
-    let name;try{name=decodeURIComponent(new URL(req.url,'http://localhost').pathname).slice(1);}catch{return reply(400,'Bad request');}
-    if(name==='healthz')return reply(200,'ok');
+    let pathname;
+    try {
+      pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    } catch {
+      return reply(400, 'Bad request');
+    }
+    const cleanPath = pathname.replace(/\/+$/, '') || '/';
+    if (cleanPath === '/healthz' || cleanPath === '/health') return reply(200, 'ok');
+    let name = pathname.replace(/^\/+/, '');
     if(!name)name='index.html';
     const item=files.get(name);if(!item)return reply(404,'Not found');
     res.setHeader('Content-Type',types[path.extname(name)]||'application/octet-stream');
@@ -36,11 +43,34 @@ function createServer(){
   });
 }
 if(require.main===module){
-  const port=Number(process.env.PORT||3000);
-  if(!Number.isInteger(port)||port<1||port>65535)throw Error('PORT must be between 1 and 65535');
-  const server=createServer();server.listen(port,'0.0.0.0',()=>console.log(`Game server ready on port ${port}`));
+  const primaryPort=Number(process.env.PORT||3000);
+  if(!Number.isInteger(primaryPort)||primaryPort<1||primaryPort>65535)throw Error('PORT must be between 1 and 65535');
+  const servers=[];
+  function startListener(port,isPrimary=false){
+    try{
+      const s=createServer();
+      s.on('error',err=>{
+        if(isPrimary){
+          console.error(`Primary port ${port} failed to bind:`,err);
+          process.exit(1);
+        }
+      });
+      s.listen(port,'0.0.0.0',()=>{
+        console.log(`Game server ready on 0.0.0.0:${port}${isPrimary?' (primary)':' (fallback)'}`);
+      });
+      servers.push(s);
+    }catch(e){
+      if(isPrimary)throw e;
+    }
+  }
+  startListener(primaryPort,true);
+  for(const fallback of [3000,8080]){
+    if(fallback!==primaryPort)startListener(fallback,false);
+  }
   for(const signal of ['SIGTERM','SIGINT'])process.once(signal,()=>{
-    server.close(()=>process.exit(0));setTimeout(()=>process.exit(0),8000).unref();
+    console.log(`Received ${signal}, closing server...`);
+    for(const s of servers)s.close();
+    setTimeout(()=>process.exit(0),8000).unref();
   });
 }
 module.exports={createServer};
