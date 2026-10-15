@@ -1,0 +1,16 @@
+**
+!Dockerfile
+!package.json
+!build.cjs
+!server.cjs
+!index.html
+!style.css
+!script.js
+!music.js
+!assets/
+!assets/*.png
+!assets/*.jpg
+!assets/*.jpeg
+!assets/*.js
+!assets/*.mp3
+!assets/*.m4a

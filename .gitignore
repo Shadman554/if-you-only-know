@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.*
+*.zip
+.tools/
+inspection/
+/*.png
+/*.mp3
+/style-*.css
+/script-*.js
+/music-*.js

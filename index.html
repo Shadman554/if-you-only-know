@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff9f6">
+  <meta name="description" content="A little flower. A few honest words. A gentle, playable apology.">
+  <title>If Only You Knew...</title>
+  <link rel="icon" href="assets/icons-flower-01.png">
+  <link rel="stylesheet" href="style-6f5189add379.css">
+</head>
+<body>
+  <main id="game" aria-label="If Only You Knew, a little apology game">
+    <img id="background" src="assets/background-1.jpg" alt="" draggable="false">
+    <div id="scene"></div>
+    <nav id="progress" aria-label="Story progress"></nav>
+    <button id="pause" class="art-button pause" aria-label="Pause game"><img src="assets/button-pause-01.png" alt=""></button>
+    <button id="music-toggle" class="art-button music-toggle" type="button" aria-label="Mute background music" aria-pressed="true" title="Mute background music"><img id="music-icon" src="assets/button-music-on.png" alt="Music on" draggable="false"></button>
+    <audio id="background-music" src="assets/background-music.mp3" preload="auto" loop></audio>
+    <div id="announcement" class="sr-only" aria-live="polite"></div>
+    <dialog id="pause-dialog" aria-labelledby="pause-heading">
+      <img class="pause-flower" src="assets/icons-flower-01.png" alt="">
+      <h2 id="pause-heading">Take your time.</h2>
+      <p>This little moment can wait.</p>
+      <button id="resume" class="soft-button">Keep going</button>
+      <button id="restart" class="text-button">Start from the beginning</button>
+    </dialog>
+  </main>
+  <p class="desktop-note">a little flower. a few honest words.</p>
+  <script src="assets/manifest.js"></script>
+  <script src="assets/keepsake-data.js"></script>
+  <script src="music-21313ef705ff.js"></script>
+  <script src="script-b7f670ec1231.js"></script>
+</body>
+</html>

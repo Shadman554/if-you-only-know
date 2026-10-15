@@ -1,0 +1,11 @@
+{
+  "name": "if-only-you-knew",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "node build.cjs",
+    "start": "node server.cjs",
+    "test": "node --test server.test.cjs"
+  }
+}

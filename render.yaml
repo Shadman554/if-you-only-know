@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: if-only-you-knew
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production

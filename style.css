@@ -1,0 +1,94 @@
+:root{color-scheme:light;--ink:#483b37;--pink:#c87586;--paper:#fffcf7;--green:#6b8260;font-family:"Segoe Print","Comic Sans MS",cursive;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;background:#f4eeea;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible,a:focus-visible{outline:3px solid #9a596d;outline-offset:5px}button:disabled{cursor:default}img{user-select:none;-webkit-user-drag:none}button{border:0}#game{position:relative;width:min(100vw,calc(94svh * 9 / 16),480px);aspect-ratio:9/16;overflow:hidden;background:var(--paper);box-shadow:0 16px 80px #684e4217;isolation:isolate;container-type:inline-size;border-radius:10px}
+#background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}#scene{position:absolute;inset:0;animation:arrive .6s ease both}.eyebrow{position:absolute;top:10.7%;left:13%;right:13%;margin:0;text-align:center;font:600 2.6cqw/1.5 "Segoe UI",sans-serif;letter-spacing:.19em;text-transform:uppercase;color:#97786d}.heading{position:absolute;top:17%;left:9%;right:9%;margin:0;text-align:center;font-weight:500;font-size:7cqw;line-height:1.4;text-wrap:balance}.title-heading{top:17%;font-size:10.5cqw;line-height:1.3;letter-spacing:-.05em}.title-heading span{display:block}.title-heading span:last-child{color:#bb6f7d}.subtitle{position:absolute;top:66%;left:13%;right:13%;text-align:center;font-size:4cqw;line-height:1.8;margin:0}.tiny-note{position:absolute;top:91.7%;left:10%;right:10%;margin:0;text-align:center;font:2.6cqw/1.6 "Segoe UI",sans-serif;color:#887c71}
+.actor{position:absolute;object-fit:contain;object-position:center bottom;bottom:43%;width:35%;height:25%;animation:breathe 3.8s ease-in-out infinite;transform-origin:50% 95%;pointer-events:none}.actor.left{left:15%}.actor.right{right:12%;width:31%}.actor.duo{left:18%;width:64%;height:29%}.actor.walk-in-left{animation:walk-left 1.5s ease-out both,breathe 3.8s 1.5s ease-in-out infinite}.actor.walk-in-right{animation:walk-right 1.5s ease-out both,breathe 4s 1.5s ease-in-out infinite}.effect{position:absolute;object-fit:contain;pointer-events:none}.heart-above{width:13%;height:12%;left:44%;top:33%}.sparkle-left{width:20%;left:3%;top:37%}.sparkle-right{width:20%;right:3%;top:35%}.float-above{width:26%;height:18%;left:37%;top:30%}
+.art-button{padding:0;background:none;display:block;transition:transform .2s,filter .2s}.art-button:hover{transform:translateY(-2px);filter:saturate(1.08)}.art-button:active{transform:translateY(2px) scale(.98)}.art-button img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}.primary{position:absolute;width:43%;height:12%;left:28.5%;top:80.7%}.primary.keep{width:76%;left:12%;height:10%;top:83%}.pause{position:absolute;top:3%;right:5%;width:9%;height:5.5%;z-index:5}.pause img{object-fit:contain}#progress{position:absolute;bottom:3.3%;left:28%;right:28%;display:flex;justify-content:center;gap:7%;pointer-events:none}.dot{width:5px;height:5px;border-radius:50%;background:#cebcb3}.dot.active{background:#ae6879;box-shadow:0 0 0 3px #f6dce2}.dot.done{background:#94a489}
+.message{position:absolute;left:11%;width:78%;top:61%;height:21%;display:flex;align-items:center;justify-content:center;text-align:center;padding:6% 7%;font-size:3.9cqw;line-height:1.75;text-wrap:balance}.message:before{content:"";position:absolute;inset:0;background:url('assets/dialogue-01.png') center/contain no-repeat;z-index:-1}.message p{margin:0}.message.plain{top:61%;padding:1% 4%;height:20%}.message.plain:before{display:none}.message strong{font-weight:500;color:#a45e73}.story-lines{position:absolute;top:18%;left:10%;right:10%;text-align:center;font-size:5.3cqw;line-height:1.8}.story-lines p{margin:.2em 0;transition:opacity 1s,transform 1s}.story-lines .unrevealed{opacity:0;transform:translateY(5px)}.story-lines p:last-child{color:#aa6275}.thought-note{top:65%;font-size:3.7cqw}.apology .message{top:61%;height:22%;font-size:3.65cqw;line-height:1.8}.ending .heading{top:19%;font-size:7.5cqw}.ending .message{top:60%;font-size:4cqw;height:21%}.ending .message:before{display:none}
+.puzzle-heading{top:15%;font-size:6.3cqw}.puzzle-instruction{position:absolute;top:24%;left:9%;right:9%;text-align:center;font-size:3.1cqw;margin:0}.board{position:absolute;top:31%;left:10%;width:80%;aspect-ratio:1;border:2px solid #66534a;border-radius:12px;background:#fbe8df;box-shadow:0 4px 0 #dcc9b9;padding:0;overflow:hidden}.tile{position:absolute;left:0;top:0;width:33.333333%;height:33.333333%;padding:2px;background:transparent;transition:transform .2s ease;cursor:default}.tile img{display:block;width:100%;height:100%;object-fit:cover;border:1px solid #80665a;border-radius:5px}.tile.movable{cursor:pointer}.tile.movable:hover img{filter:brightness(1.04)}.tile.hinted{z-index:2}.tile.hinted img{outline:4px solid #e98da4;outline-offset:-5px;filter:brightness(1.08)}.tile .tile-number{position:absolute;bottom:8%;left:8%;background:#fffcf2e6;border-radius:50%;width:18%;aspect-ratio:1;font:600 2.6cqw/1.7 "Segoe UI",sans-serif;color:#5c4c45}.empty-tile{position:absolute;width:33.333%;height:33.333%;background:url('assets/tile-style-02.png') center/92% 92% no-repeat;opacity:.45}.puzzle-actions{position:absolute;top:79%;left:13%;right:13%;display:flex;justify-content:center;align-items:center;gap:14%}.text-button{background:transparent;font-size:3.1cqw;padding:10px 2px;text-decoration:underline;text-decoration-color:#d4a4a7;text-underline-offset:4px}.puzzle-status{position:absolute;top:86%;left:8%;right:8%;font-size:3cqw;text-align:center;margin:0;color:#77695f}.picture-preview{position:absolute;top:31%;left:10%;width:80%;aspect-ratio:1;object-fit:cover;border:3px solid #a67f7c;border-radius:10px;z-index:3;box-shadow:0 8px 22px #765c4d26}.completed-picture{position:absolute;top:24%;left:22%;width:56%;aspect-ratio:1;object-fit:cover;border:2px solid #6c574b;border-radius:10px;box-shadow:0 4px 0 #e6c6bd;transform:rotate(-2deg)}.completion .message{top:59%;height:23%}.completion .sparkle-left{top:35%}.completion .sparkle-right{top:30%}
+.flower-instruction{position:absolute;top:28%;left:13%;right:13%;text-align:center;font-size:3.8cqw;line-height:1.8;margin:0}.flower-button{position:absolute;left:22%;top:66%;width:19%;height:14%;padding:0;border:0;background:none;touch-action:none;z-index:5;cursor:grab;transition:filter .2s}.flower-button img{width:100%;height:100%;object-fit:contain;pointer-events:none}.flower-button.dragging{cursor:grabbing;filter:drop-shadow(0 6px 5px #b778843a)}.flower-button.selected{filter:drop-shadow(0 0 7px #dc9aaf)}.flower-target{position:absolute;left:56%;top:39%;width:31%;height:20%;background:none;border:2px dashed transparent;border-radius:45%;z-index:3}.flower-target.ready{border-color:#cd92a0;background:#fff5f33b}.drag-hint{position:absolute;top:69%;left:38%;width:16%;height:11%;object-fit:contain;pointer-events:none;animation:hint-travel 3.6s ease-in-out infinite}.flower-caption{position:absolute;top:83%;left:10%;right:10%;margin:0;text-align:center;font-size:3cqw;color:#857269}.handoff .actor.duo{width:72%;left:14%;height:29%}.kept-flower{position:absolute;width:22%;height:17%;top:28%;left:39%;object-fit:contain;animation:breathe 3s infinite}.kept .actor.duo{bottom:42%;height:23%;width:54%;left:23%}.kept .heading{font-size:7cqw}.kept .message{top:62%;height:15%;font-size:3.8cqw}.keepsake-actions{position:absolute;top:79%;left:15%;right:15%;display:flex;flex-direction:column;align-items:center;gap:8px}.download{display:block;color:#865567;font-size:3.6cqw;background:#fbe2e7;border:1px solid #b98c92;border-radius:24px;padding:9px 22px;text-decoration:none}.replay{font-size:3cqw}.desktop-note{font:11px "Segoe UI",sans-serif;color:#9a8780;letter-spacing:.12em;margin:15px 0 0}dialog{border:1.5px solid #b49584;border-radius:24px;background:var(--paper);width:min(82vw,340px);padding:30px 24px;text-align:center;color:var(--ink);box-shadow:0 10px 60px #4d3a4929}dialog::backdrop{background:#57473c50;backdrop-filter:blur(4px)}dialog h2{font-weight:500;font-size:24px}dialog p{font-size:14px}.pause-flower{height:72px;object-fit:contain}.soft-button{display:block;margin:20px auto 5px;border:1px solid #c7949b;background:#f8dce3;border-radius:22px;padding:11px 24px;font-size:16px}dialog .text-button{font-size:12px}.paused *, .paused *:before{animation-play-state:paused!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
+@keyframes arrive{from{opacity:0}to{opacity:1}}@keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.012)}}@keyframes walk-left{from{translate:-30% 0;opacity:0}to{translate:0 0;opacity:1}}@keyframes walk-right{from{translate:30% 0;opacity:0}to{translate:0 0;opacity:1}}@keyframes hint-travel{0%,20%{translate:0 0;opacity:0}35%{opacity:.85}75%{translate:55% -105%;opacity:.85}100%{translate:55% -105%;opacity:0}}
+@media(max-width:540px){body{background:var(--paper)}#game{width:min(100vw,calc(100svh * 9 / 16));border-radius:0;box-shadow:none}.desktop-note{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}.story-lines .unrevealed{transform:none}}
+/* Shared animation stage keeps each character the same size through every emotion. */
+.actor,.actor.right{bottom:var(--ground-bottom,38%);width:55%;height:33%}.actor.left{left:2%}.actor.right{right:2%}.actor.duo,.handoff .actor.duo,.ending .actor.duo{bottom:var(--ground-bottom,38%);width:90%;height:33%;left:5%}
+.heading:focus,.story-lines h1:focus{outline:none}
+.thinking .actor{animation:none}
+.music-toggle{position:absolute;right:17%;top:2.5%;width:12%;height:7%;min-width:44px;min-height:44px;padding:0;background:none;z-index:5}
+.music-toggle img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(72,59,55,0.18));transition:transform .2s ease,filter .2s ease}
+.music-toggle:hover img{transform:translateY(-2px) scale(1.08);filter:drop-shadow(0 4px 8px rgba(72,59,55,0.25)) saturate(1.1)}
+.music-toggle:active img{transform:translateY(2px) scale(0.95)}
+.music-toggle.music-off img{filter:drop-shadow(0 2px 4px rgba(72,59,55,0.12)) saturate(0.9) opacity(0.9)}
+.music-toggle.music-off:hover img{filter:drop-shadow(0 4px 8px rgba(72,59,55,0.22)) saturate(1.1) opacity(1)}
+.ending .ending-pair{bottom:35%;left:5%;width:90%;height:33%;animation:none}
+.message:before{background-image:url('assets/message-card.png')}.message{padding:5% 8%;font-size:3.7cqw;top:64%;height:18%}.message.plain{top:64%;height:18%;padding:1% 2%}.message.plain:before{display:block;background:#fffdf8ed;border-radius:24px;filter:blur(7px);inset:5% -2%}
+.subtitle{top:67%;font-size:3.8cqw}.subtitle:before{content:"";position:absolute;inset:-7px;background:#fffdf8e8;filter:blur(8px);z-index:-1}
+/* Story text stays inside a measured reading area. Longer copy is paginated. */
+.message,.message.plain,.thinking .message,.completion .message,.handoff .message,.apology .message,.ending .message{left:5%;width:90%;top:66%;height:18%;padding:0;font-size:clamp(14px,3.7cqw,18px);line-height:1.45;text-wrap:pretty;display:grid;place-items:center}
+.message:before{inset:0;background:url('assets/message-card.png') center/contain no-repeat;filter:none}
+.message-copy{width:64%;height:64%;display:flex;align-items:center;justify-content:center}
+.message-copy p{width:100%;margin:0;flex:none}
+.message.plain .message-copy{width:88%;height:91%}
+.message.plain:before,.ending .message.plain:before{display:block;inset:0;background:#fffdf8f0;border-radius:22px;filter:blur(6px)}
+.message-pagination{position:absolute;top:100%;left:0;right:0;font:clamp(10px,2.7cqw,13px)/1.3 'Segoe UI',sans-serif;color:#80665f;text-align:center}
+.primary,.apology .primary{top:86%;height:9%;width:43%;left:28.5%}
+.primary.keep{top:86%;height:8%;width:80%;left:10%}.primary.keep img{object-fit:contain}
+.pause{width:12%;height:7%;min-width:44px;min-height:44px;right:4%;top:2.5%}
+.flower-target{top:43%;height:20%;left:56%}
+.completion .completed-picture{top:24%;width:56%;left:22%}
+.kept .actor.duo{bottom:35%;height:26%;width:74%;left:13%}
+.kept .message{top:65%;height:18%;font-size:clamp(14px,3.5cqw,17px);line-height:1.4}
+.kept .message-copy{width:91%;height:96%}
+.kept .message-pagination{display:none}
+.keepsake-actions{top:84%;gap:3px}.download{font-size:clamp(13px,3.4cqw,17px);padding:8px 20px}.replay{font-size:clamp(12px,3cqw,15px);padding:6px 2px}
+.kept-flower{top:26%}
+@media(max-width:350px){.message-copy{width:68%;height:68%}.message.plain .message-copy{width:91%;height:94%}.kept .message{font-size:13px}}
+/* A quiet, two-choice ending with a readable letter and shared ground level. */
+.invitation .heading{top:17%;left:7%;right:7%;font-size:4.8cqw;line-height:1.5;white-space:pre-line}
+.ending.invitation .message{top:30%;height:21%;font-size:clamp(14px,3.6cqw,17px);line-height:1.45}
+.invitation .message.plain .message-copy{width:91%;height:94%}
+.invitation .actor,.flower-moment .actor{height:26%;width:46%;bottom:35%;animation:none}
+.invitation .actor.left,.flower-moment .actor.left{left:3%}
+.invitation .actor.right,.flower-moment .actor.right{right:3%}
+.ending-reader{position:absolute;left:12%;right:12%;top:74%;display:flex;justify-content:center;align-items:center;gap:10%;min-height:44px}
+.ending-reader .soft-button{margin:0;min-width:110px;min-height:44px;font-size:clamp(14px,3.6cqw,17px)}
+.ending-reader .text-button{font-size:clamp(12px,3cqw,15px);min-height:44px}
+.invitation .ending-reader.finished{top:65%;min-height:32px}
+.invitation .ending-reader.finished .text-button{min-height:32px;padding:3px 10px}
+.ending-choices{position:absolute;top:72%;left:10%;right:10%;display:grid;gap:12px}
+.ending-choice{display:block;width:100%;min-height:44px;padding:10px 12px;border:1.5px solid #ba8791;border-radius:25px;text-decoration:none;text-align:center;font-size:clamp(13px,3.5cqw,17px);line-height:1.5;color:#6e4352;background:#f9d9e1;box-shadow:0 3px 0 #e9c2ca;transition:background .2s}
+.ending-choice:hover{background:#f6cad5}.flower-choice{background:#fff9f0;border-color:#b3b798;box-shadow:0 3px 0 #e1e4d1;color:#626d50}.flower-choice:hover{background:#f2f4e9}
+.ending-replay{position:absolute;top:90%;left:10%;width:80%;min-height:36px}
+.flower-moment .heading{top:24%;font-size:7cqw}
+.flower-moment .actor{transition:none}
+.peaceful-heart{position:absolute;top:46%;left:68%;width:7%;height:7%;object-fit:contain;animation:peaceful-rise 2.5s ease-out both;pointer-events:none}
+#scene.flower-moment{transition:opacity 1.2s ease}
+#scene.flower-moment.soft-fade{opacity:0;animation:none}
+#scene.peaceful-finale{animation:arrive 1.4s ease both}
+.peaceful-finale .heading{top:17%;font-size:5.5cqw;line-height:1.4;left:11%;right:11%}
+.peaceful-finale .kept-flower{top:26%;height:10%;width:20%;left:40%;animation:none}
+.ending.peaceful-finale .message{top:37%;height:40%;font-size:clamp(13px,3.4cqw,16px);line-height:1.45}
+.peaceful-finale .message.plain .message-copy{width:90%;height:94%}
+.peaceful-finale .message-pagination{display:block}
+.peaceful-finale .ending-reader{top:80%}
+.peaceful-finale .ending-reader.finished{top:30%;left:4%;right:auto}
+.peaceful-finale .keepsake-actions{top:79%;left:10%;right:10%;gap:7px}
+.the-end{margin:0;color:#977269;font-size:clamp(14px,3.6cqw,18px)}
+.peaceful-finale .download{min-height:40px;font-size:clamp(12px,3.2cqw,16px);padding:7px 20px;text-align:center}
+@keyframes peaceful-rise{0%{opacity:0;transform:translateY(10px) scale(.8)}25%{opacity:.9}100%{opacity:0;transform:translateY(-65px) scale(1)}}
+@media(prefers-reduced-motion:reduce){#scene.flower-moment{transition:none}.peaceful-heart{opacity:.6}}
+/* Keep the supplied illustrated controls consistent across all chapters. */
+.title-scene .primary.start{top:80%;height:10%;width:44%;left:28%}
+.title-scene .tiny-note{top:92%}
+.has-previous .primary{left:48%;width:43%}
+.story-previous{position:absolute;left:9%;width:30%;top:86%;height:9%;min-height:36px;font-size:clamp(12px,3.2cqw,16px);text-align:center}
+.puzzle .story-previous{top:90%;height:5%;min-height:28px}
+.puzzle .primary{top:89%;height:7%}
+.ending-reader{left:9%;right:9%;height:9%;justify-content:space-between;gap:0}
+.ending-reader .reader-next{width:52.44%;height:100%;min-height:44px;flex:none}
+.ending-reader .text-button{width:36.58%;height:100%;flex:none;font-size:clamp(12px,3.2cqw,16px)}
+.ending-reader.finished{justify-content:center;height:4%}
+.ending-reader.finished .text-button{width:auto;height:auto;padding:3px 10px}
+.peaceful-finale .ending-reader.finished{left:4%;right:auto;height:5%}
+.peaceful-finale .keepsake-actions{top:82%}
+.peaceful-finale .ending-replay{top:89%}
