@@ -1,5 +1,5 @@
 'use strict';
-const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
+const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),zlib=require('node:zlib');
 const root=path.join(__dirname,'dist');
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.mp3':'audio/mpeg','.m4a':'audio/mp4','.ttf':'font/ttf','.woff':'font/woff','.woff2':'font/woff2'};
 function createServer(){
@@ -23,7 +23,9 @@ function createServer(){
     if(!name)name='index.html';
     const item=files.get(name);if(!item)return reply(404,'Not found');
     res.setHeader('Content-Type',types[path.extname(name)]||'application/octet-stream');
-    res.setHeader('Cache-Control',/^[a-z]+-[a-f0-9]{12}\./.test(name)?'public, max-age=31536000, immutable':'no-cache');
+    const isHashed=/^[a-z]+-[a-f0-9]{12}\./.test(name);
+    const isAsset=name.startsWith('assets/');
+    res.setHeader('Cache-Control',isHashed?'public, max-age=31536000, immutable':(isAsset?'public, max-age=2592000, stale-while-revalidate=86400':'no-cache'));
     res.setHeader('ETag',item.etag);res.setHeader('Accept-Ranges','bytes');
     if(req.headers['if-none-match']===item.etag){res.writeHead(304);return res.end();}
     let start=0,end=item.size-1,status=200;
@@ -36,8 +38,24 @@ function createServer(){
       if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start<0||start>end||start>=item.size){res.setHeader('Content-Range',`bytes */${item.size}`);return reply(416,'Invalid range');}
       status=206;res.setHeader('Content-Range',`bytes ${start}-${end}/${item.size}`);
     }
-    res.setHeader('Content-Length',end-start+1);res.writeHead(status);
-    if(req.method==='HEAD')return res.end();
+    if(req.method==='HEAD'){
+      res.setHeader('Content-Length',end-start+1);
+      res.writeHead(status);
+      return res.end();
+    }
+    const isCompressible=/^\.(html|js|css|json|ttf)$/i.test(path.extname(name));
+    if(!req.headers.range&&isCompressible&&req.headers['accept-encoding']?.includes('gzip')){
+      res.setHeader('Content-Encoding','gzip');
+      res.writeHead(200);
+      const stream=fs.createReadStream(item.file);
+      const gzip=zlib.createGzip({level:6});
+      stream.on('error',()=>res.destroy());
+      res.on('close',()=>{stream.destroy();gzip.destroy();});
+      stream.pipe(gzip).pipe(res);
+      return;
+    }
+    res.setHeader('Content-Length',end-start+1);
+    res.writeHead(status);
     const stream=fs.createReadStream(item.file,{start,end});
     stream.on('error',()=>res.destroy());res.on('close',()=>stream.destroy());stream.pipe(res);
   });

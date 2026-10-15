@@ -7,16 +7,22 @@
   <meta name="description" content="A little flower. A few honest words. A gentle, playable apology.">
   <title>If Only You Knew...</title>
   <link rel="icon" href="assets/icons-flower-01.png">
+  <link rel="preload" href="assets/segoepr.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/background-1.jpg" as="image">
+  <link rel="preload" href="assets/button-start-01.png" as="image">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main id="game" aria-label="If Only You Knew, a little apology game">
-    <img id="background" src="assets/background-1.jpg" alt="" draggable="false">
+    <img id="background" src="assets/background-1.jpg" alt="" draggable="false" fetchpriority="high">
     <div id="scene"></div>
     <nav id="progress" aria-label="Story progress"></nav>
     <button id="pause" class="art-button pause" aria-label="Pause game"><img src="assets/button-pause-01.png" alt=""></button>
     <button id="music-toggle" class="art-button music-toggle" type="button" aria-label="Mute background music" aria-pressed="true" title="Mute background music"><img id="music-icon" src="assets/button-music-on.png" alt="Music on" draggable="false"></button>
-    <audio id="background-music" src="assets/background-music.mp3" preload="auto" loop></audio>
+    <audio id="background-music" preload="none" loop>
+      <source src="assets/background-music.m4a" type="audio/mp4">
+      <source src="assets/background-music.mp3" type="audio/mpeg">
+    </audio>
     <div id="announcement" class="sr-only" aria-live="polite"></div>
     <dialog id="pause-dialog" aria-labelledby="pause-heading">
       <img class="pause-flower" src="assets/icons-flower-01.png" alt="">
@@ -28,8 +34,8 @@
   </main>
   <p class="desktop-note">a little flower. a few honest words.</p>
   <script src="assets/manifest.js"></script>
-  <script src="assets/keepsake-data.js"></script>
-  <script src="music-21313ef705ff.js"></script>
-  <script src="script-b7f670ec1231.js"></script>
+  <script src="assets/keepsake-data.js" defer></script>
+  <script src="music.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

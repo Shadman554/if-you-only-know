@@ -222,8 +222,12 @@ function endingReader(actions){
 }
 function getKeepsakeURL(){
   if(!keepsakeObjectURL){
-    const bytes=Uint8Array.from(atob(window.KEEPSAKE_DATA.split(',')[1]),c=>c.charCodeAt(0));
-    keepsakeObjectURL=URL.createObjectURL(new Blob([bytes],{type:'image/png'}));
+    if(window.KEEPSAKE_DATA){
+      const bytes=Uint8Array.from(atob(window.KEEPSAKE_DATA.split(',')[1]),c=>c.charCodeAt(0));
+      keepsakeObjectURL=URL.createObjectURL(new Blob([bytes],{type:'image/png'}));
+    }else{
+      keepsakeObjectURL='assets/keepsake.png';
+    }
   }
   return keepsakeObjectURL;
 }
