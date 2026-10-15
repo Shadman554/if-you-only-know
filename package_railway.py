@@ -9,6 +9,6 @@ with ZipFile(root/'If Only You Knew - Railway.zip','w',ZIP_DEFLATED,compressleve
     workflow=root/'.github'/'workflows'/'deploy.yml'
     if workflow.exists(): z.write(workflow,'.github/workflows/deploy.yml')
     for asset in sorted((root/'assets').iterdir()):
-        if asset.is_file() and asset.suffix in ('.png','.jpg','.jpeg','.js','.mp3','.m4a'):
+        if asset.is_file() and asset.suffix in ('.png','.jpg','.jpeg','.js','.mp3','.m4a','.ttf','.woff','.woff2'):
             z.write(asset,asset.relative_to(root))
 print('Railway deployment ZIP created.')

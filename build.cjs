@@ -11,7 +11,7 @@ for(const [stem,ext] of [['style','css'],['script','js'],['music','js']]){
 }
 write('index.html',html);write('Play Updated Game.html',html);
 for(const entry of fs.readdirSync(path.join(root,'assets'),{withFileTypes:true})){
-  if(entry.isFile()&&/^[a-z0-9-]+\.(png|jpg|jpeg|mp3|m4a|js)$/i.test(entry.name)){
+  if(entry.isFile()&&/^[a-z0-9-]+\.(png|jpg|jpeg|mp3|m4a|js|ttf|woff|woff2)$/i.test(entry.name)){
     write(`assets/${entry.name}`,fs.readFileSync(path.join(root,'assets',entry.name)));
   }
 }

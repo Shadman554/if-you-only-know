@@ -1,7 +1,7 @@
 'use strict';
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
 const root=path.join(__dirname,'dist');
-const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.mp3':'audio/mpeg','.m4a':'audio/mp4'};
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.mp3':'audio/mpeg','.m4a':'audio/mp4','.ttf':'font/ttf','.woff':'font/woff','.woff2':'font/woff2'};
 function createServer(){
   const files=new Map(JSON.parse(fs.readFileSync(path.join(root,'_files.json'),'utf8')).map(name=>{
     const file=path.join(root,name),stat=fs.statSync(file);

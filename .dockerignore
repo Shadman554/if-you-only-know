@@ -14,3 +14,6 @@
 !assets/*.js
 !assets/*.mp3
 !assets/*.m4a
+!assets/*.ttf
+!assets/*.woff
+!assets/*.woff2
